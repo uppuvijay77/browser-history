@@ -76,9 +76,14 @@ const initialHistoryList = [
     domainUrl: 'google.com',
   },
 ]
+const message = 'There is no history to show'
 
 class BrowserHistory extends Component {
-  state = {searchInput: '', noData: '', historyList: initialHistoryList}
+  state = {
+    searchInput: '',
+    noData: message,
+    historyList: initialHistoryList,
+  }
 
   onChangeSearchInput = event => {
     this.setState({searchInput: event.target.value})
@@ -88,14 +93,7 @@ class BrowserHistory extends Component {
     const {historyList} = this.state
     const filteredHistoryList = historyList.filter(each => each.id !== id)
 
-    if (filteredHistoryList.length === 0) {
-      this.setState({
-        historyList: filteredHistoryList,
-        noData: 'There is no history to show',
-      })
-    } else {
-      this.setState({historyList: filteredHistoryList, noData: ''})
-    }
+    this.setState({historyList: filteredHistoryList})
   }
 
   render() {
